@@ -15,8 +15,8 @@ Before running the application, make sure you have the following prerequisites i
 
 1. Clone the repository:
 
-   ```sh
-  [ git clone https://github.com/yourusername/reach-handling.git](https://github.com/adityaaa1702/Reach-Handling-2)https://github.com/adityaaa1702/Reach-Handling-2
+  ```sh[https://github.com/yourusername/reach-handling.git](https://github.com/adityaaa1702/Reach-Handling-2]
+
 
 2. Install the required Python packages:
 pip install pymongo
