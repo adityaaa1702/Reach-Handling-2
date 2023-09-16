@@ -4,16 +4,16 @@ from tkinter import PhotoImage, Label, Entry, Button, Toplevel, Text
 from tkinter import simpledialog
 
 
-# Create a MongoDB client and connect to your database and collection
+
 client = pymongo.MongoClient('mongodb://127.0.0.1:27017/')
 mydb = client['Reachandling']
 information = mydb['Reach']
 
-# Define a variable to track the current mode (0 for initial, 1 for entering info, 2 for finding info)
-current_mode = 0
-current_search_mode = 0  # Variable to track the search mode
 
-# Define a dictionary to store the entered information
+current_mode = 0
+current_search_mode = 0  
+
+
 entered_info = {
     "Name": "",
     "Content": "",
@@ -24,12 +24,13 @@ entered_info = {
 
 input_frame = None
 
-# Define functions to switch between modes
+
 def enter_info_mode():
     global current_mode
     current_mode = 1
     clear_widgets()
     show_info_entry_widgets()
+     
 
 def find_info_mode():
     global current_mode
@@ -37,7 +38,8 @@ def find_info_mode():
     current_mode = 2
     clear_widgets()
     show_search_options()
-    current_search_mode = 0  # Reset the search mode
+    current_search_mode = 0 
+
 
 def search_data(search_mode):
     results = []
@@ -71,16 +73,17 @@ def search_data(search_mode):
     
     
 def show_search_options():
-    # Remove the previous Find Info button if it's already packed
-    find_info_button.pack_forget()
+    find_info_button.grid_forget()
 
     instagram_button = tk.Button(input_frame, text="Search by Instagram Followers", command=lambda: search_data("Instagram"))
     youtube_button = tk.Button(input_frame, text="Search by YouTube Subscribers", command=lambda: search_data("YouTube"))
     twitter_button = tk.Button(input_frame, text="Search by Twitter Followers", command=lambda: search_data("Twitter"))
-
-    instagram_button.pack(pady=5)
-    youtube_button.pack(pady=5)
-    twitter_button.pack(pady=5)
+   
+    instagram_button.grid(row=4, column=3, padx=5, pady=5)
+    youtube_button.grid(row=5, column=3, padx=5, pady=5)
+    twitter_button.grid(row=6, column=3, padx=5, pady=5)
+    
+    find_info_button.config(state=tk.DISABLED)
 
 
 min_max_window = None
@@ -90,7 +93,7 @@ def search_min_max_window(search_criteria):
     show_min_max_window(search_criteria)
 
 def show_min_max_window(search_criteria):
-    global min_max_window  # Make min_max_window global
+    global min_max_window  
     min_max_window = Toplevel(root)
     min_max_window.title(f"Enter Min and Max {search_criteria}")
 
@@ -114,6 +117,9 @@ def show_results_window():
     results_window = Toplevel(root)
     results_window.title("Search Results")
     results_window.geometry("400x300")
+    
+    go_back_button = tk.Button(results_window, text="Go Back to Main Menu", command=go_back_to_initial)
+    go_back_button.pack(pady=5)
 
 def display_search_results(results):
     show_results_window()
@@ -145,11 +151,17 @@ def display_search_results(results):
 def submit_info():
     for key, value in entered_info.items():
         if not value:
-            entered_info[key] = None  # Set empty values to None
+            entered_info[key] = None  
 
     insert_data()
     clear_widgets()
     show_initial_widgets()
+
+
+def go_back_to_initial():
+    clear_widgets()
+    show_initial_widgets()
+
 
 def show_info_entry_widgets():
     name_label.grid(row=0, column=0)
@@ -190,6 +202,8 @@ def insert_data():
 
     information.insert_one(entered_info)
     result_label.config(text="Data inserted successfully!")
+    
+    
 
 def show_initial_widgets():
     clear_widgets()
@@ -198,7 +212,7 @@ def show_initial_widgets():
 
 root = tk.Tk()
 root.title("Reach Handling")
-root.maxsize(400, 550)
+root.maxsize(600, 800)
 
 logo = PhotoImage(file="logo.gif")
 logo = logo.subsample(2)
@@ -234,6 +248,7 @@ yt_subscribers_label = tk.Label(input_frame, text="YouTube Subscribers(in M):")
 yt_subscribers_entry = tk.Entry(input_frame)
 
 submit_button = tk.Button(input_frame, text="Submit", command=submit_info)
+
 
 result_label = tk.Label(root, text="")
 result_label.pack()
