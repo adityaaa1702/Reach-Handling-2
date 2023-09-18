@@ -118,8 +118,7 @@ def show_results_window():
     results_window.title("Search Results")
     results_window.geometry("400x300")
     
-    go_back_button = tk.Button(results_window, text="Go Back to Main Menu", command=go_back_to_initial)
-    go_back_button.pack(pady=5)
+   
 
 def display_search_results(results):
     show_results_window()
