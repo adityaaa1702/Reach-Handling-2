@@ -2,6 +2,16 @@
 
 Reach Handling is a Python application for managing and searching for information about people and their online reach on platforms like Instagram, Twitter, and YouTube. This project uses Tkinter for the graphical user interface and MongoDB for data storage.
 
+![Screenshot 2023-09-16 195529](https://github.com/adityaaa1702/chess/assets/132464789/eda4e77d-acc0-4c69-adcc-9692b866efde)
+
+![Screenshot 2023-09-16 200948](https://github.com/adityaaa1702/chess/assets/132464789/5984b41a-d700-4213-bbcd-c63f16240e31)
+
+![Screenshot 2023-09-16 201057](https://github.com/adityaaa1702/chess/assets/132464789/0a515b2e-7ea1-4d86-9334-bb7b50b8a40d)
+
+
+![Screenshot 2023-09-16 201030](https://github.com/adityaaa1702/chess/assets/132464789/2e91ffcc-06df-427b-9423-a8b163080b3d)
+
+
 
 
 ### Prerequisites
