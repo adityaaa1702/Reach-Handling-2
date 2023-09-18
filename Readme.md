@@ -34,7 +34,7 @@ Run the application:
 main.py
 The application will open, and you can start entering or searching for information.
 
-(or go to dist folder run main.exe) 
+(or just go to dist folder run main.exe) 
 
 
 ### Features
