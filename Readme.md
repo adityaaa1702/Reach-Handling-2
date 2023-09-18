@@ -24,6 +24,8 @@ Run the application:
 main.py
 The application will open, and you can start entering or searching for information.
 
+(or go to dist folder run main.exe) 
+
 
 ### Features
 Enter New Info: Add information about a person, including their name, content, Instagram followers, Twitter followers, Twitter username, YouTube channel, and YouTube subscribers.
