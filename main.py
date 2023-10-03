@@ -26,11 +26,19 @@ input_frame = None
 
 
 def enter_info_mode():
-    global current_mode
-    current_mode = 1
-    clear_widgets()
-    show_info_entry_widgets()
-     
+   global current_mode
+   current_mode = 1
+   clear_widgets()
+   global entered_info  
+   entered_info = {  
+        "Name": "",
+        "Content": "",
+        "Instagram": {"Followers": None, "Username": ""},
+        "Twitter": {"Followers": None, "Username": ""},
+        "YouTube": {"Subscribers": None, "Channel": ""},
+    }
+   show_info_entry_widgets()
+
 
 def find_info_mode():
     global current_mode
@@ -118,7 +126,6 @@ def show_results_window():
     results_window.title("Search Results")
     results_window.geometry("400x300")
     
-   
 
 def display_search_results(results):
     show_results_window()
@@ -146,15 +153,49 @@ def display_search_results(results):
                 result_text.insert(tk.END, f"YouTube Subscribers: {data['YouTube']['Subscribers']}\n")
 
             result_text.insert(tk.END, "\n")
+            
+            
+def clear_input_fields():
+    # Clear the text in all input fields
+    name_entry.delete(0, tk.END)
+    content_entry.delete(0, tk.END)
+    ig_followers_entry.delete(0, tk.END)
+    ig_username_entry.delete(0, tk.END)
+    tt_followers_entry.delete(0, tk.END)
+    tt_username_entry.delete(0, tk.END)
+    yt_channel_entry.delete(0, tk.END)
+    yt_subscribers_entry.delete(0, tk.END)
+
+   
+    result_label.config(text="")
+            
 
 def submit_info():
-    for key, value in entered_info.items():
-        if not value:
-            entered_info[key] = None  
+   
+    entered_info = {
+        "Name": name_entry.get(),
+        "Content": content_entry.get(),
+        "Instagram": {"Followers": None, "Username": ig_username_entry.get()},
+        "Twitter": {"Followers": None, "Username": tt_username_entry.get()},
+        "YouTube": {"Subscribers": None, "Channel": yt_channel_entry.get()},
+    }
 
-    insert_data()
-    clear_widgets()
-    show_initial_widgets()
+    if ig_followers_entry.get():
+        entered_info["Instagram"]["Followers"] = float(ig_followers_entry.get())
+    if tt_followers_entry.get():
+        entered_info["Twitter"]["Followers"] = float(tt_followers_entry.get())
+    if yt_subscribers_entry.get():
+        entered_info["YouTube"]["Subscribers"] = float(yt_subscribers_entry.get())
+
+    if not entered_info["Name"]:
+        result_label.config(text="Name is required.")
+        return
+
+   
+    information.insert_one(entered_info)
+    result_label.config(text="Data inserted successfully!")
+
+    clear_input_fields()
 
 
 def go_back_to_initial():
